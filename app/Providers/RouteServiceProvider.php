@@ -81,6 +81,10 @@ class RouteServiceProvider extends ServiceProvider
                         $component
                     );
 
+                    if (config('multitenancy.enabled')) {
+                        array_push($route['middleware'], 'tenant.api');
+                    }
+
                     $router->group([
                         'middleware' => $route['middleware'],
                         'namespace' => $namespace,
